@@ -38,7 +38,7 @@ class Admin_users extends CI_Controller{
             ),
             'menuactive'=>$this->set_menu_active('users')
         );
-        $this->load->view('admin/expandable_column',$data);
+        $this->load->view('admin/users',$data);
     }
     function custom_column(){
         $data = array(

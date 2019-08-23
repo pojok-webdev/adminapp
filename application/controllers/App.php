@@ -23,7 +23,11 @@ class App extends CI_Controller{
         $params = $this->input->post();
         $email = $params['email'];
         $userpassword = $params['password'];
-        if($this->ceklogin($email,$userpassword)){
+        $checkuser = $this->ceklogin($email,$userpassword);
+        if($checkuser!==false){
+            $this->session->set_userdata('useremail',$email);
+            $this->session->set_userdata('username',$checkuser->username);
+            $this->session->set_userdata('userid',$checkuser->id);
             redirect('admin_users');
         }else{
             redirect('app/logout');
@@ -48,7 +52,7 @@ class App extends CI_Controller{
 
         $_password = $_salt . substr($_temp,0,strlen($_temp)-10);
         if(strcmp($_password,$password)===0){
-            return true;
+            return $user;
         }else{
             return false;
         }

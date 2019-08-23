@@ -124,7 +124,7 @@
                         <a href="inbox.html?a=view">
                         <span class="photo"><img src="/assets/metronics/img/avatar1.jpg" alt="" /></span>
                         <span class="subject">
-                        <span class="from">Bob Nilson</span>
+                        <span class="from"><?php echo $this->session->userdata('useremail');?></span>
                         <span class="time">2 hrs</span>
                         </span>
                         <span class="message">
@@ -267,7 +267,7 @@
     <li class="dropdown user">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
         <img alt="" src="/assets/metronics/img/avatar1_small.jpg" />
-        <span class="username">Bob Nilson</span>
+        <span class="username"><?php echo $this->session->userdata('username');?></span>
         <i class="icon-angle-down"></i>
         </a>
         <ul class="dropdown-menu">
