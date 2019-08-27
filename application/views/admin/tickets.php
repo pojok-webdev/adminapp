@@ -103,7 +103,7 @@
 											<td><?php echo $obj->kdticket;?></td>
 											<td><?php echo $obj->clientname;?></td>
 											<td class="hidden-480"><?php echo $obj->create_date;?></td>
-											<td class="hidden-480">4</td>
+											<td class="hidden-480 curdate">4</td>
 											<td class="hidden-480">X</td>
 										</tr>
 										<?php }?>
@@ -153,10 +153,11 @@
 				});
 			}
 
-		   App.init();
+		   	App.init();
 			initTable();
 		});
 	</script>
+	<script src="/assets/padiapp/ticket.js"></script>
 </body>
 <!-- END BODY -->
 </html>
