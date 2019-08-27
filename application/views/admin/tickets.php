@@ -76,7 +76,7 @@
 										Columns
 										<i class="icon-angle-down"></i>
 										</a>
-										<div id="sample_2_column_toggler" class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
+										<div id="thisdatatable_column_toggler" class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
 											<label><input type="checkbox" checked data-column="0">Rendering engine</label>
 											<label><input type="checkbox" checked data-column="1">Browser</label>
 											<label><input type="checkbox" checked data-column="2">Platform(s)</label>
@@ -87,12 +87,12 @@
 								</div>
 							</div>
 							<div class="portlet-body">
-								<table class="table table-striped table-bordered table-hover table-full-width" id="sample_2">
+								<table class="table table-striped table-bordered table-hover table-full-width" id="thisdatatable">
 									<thead>
 										<tr>
-											<th>Rendering engine</th>
-											<th>Browser</th>
-											<th class="hidden-480">Platform(s)</th>
+											<th>Kode</th>
+											<th>Name</th>
+											<th class="hidden-480">Createdate</th>
 											<th class="hidden-480">Engine version</th>
 											<th class="hidden-480">CSS grade</th>
 										</tr>
@@ -102,7 +102,7 @@
 										<tr>
 											<td><?php echo $obj->kdticket;?></td>
 											<td><?php echo $obj->clientname;?></td>
-											<td class="hidden-480">Win 95+</td>
+											<td class="hidden-480"><?php echo $obj->create_date;?></td>
 											<td class="hidden-480">4</td>
 											<td class="hidden-480">X</td>
 										</tr>
@@ -126,9 +126,35 @@
 	<!-- END FOOTER -->
 	<?php $this->load->view('commons/metronic_table_footer');?>
 	<script>
-		jQuery(document).ready(function() {       
+		jQuery(document).ready(function() {
+			var initTable = function() {
+				var oTable = $('#thisdatatable').dataTable( {           
+					"aoColumnDefs": [
+						{ "aTargets": [ 0 ] }
+					],
+					"aaSorting": [[0, 'desc']],
+					"aLengthMenu": [
+						[5, 15, 20, -1],
+						[5, 15, 20, "All"] // change per page values here
+					],
+					// set the initial value
+					"iDisplayLength": 10,
+				});
+
+				jQuery('#thisdatatable_wrapper .dataTables_filter input').addClass("m-wrap small"); // modify table search input
+				jQuery('#thisdatatable_wrapper .dataTables_length select').addClass("m-wrap small"); // modify table per page dropdown
+				jQuery('#thisdatatable_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
+
+				$('#thisdatatable_column_toggler input[type="checkbox"]').change(function(){
+					/* Get the DataTables object again - this is not a recreation, just a get of the object */
+					var iCol = parseInt($(this).attr("data-column"));
+					var bVis = oTable.fnSettings().aoColumns[iCol].bVisible;
+					oTable.fnSetColumnVis(iCol, (bVis ? false : true));
+				});
+			}
+
 		   App.init();
-		   TableAdvanced.init();
+			initTable();
 		});
 	</script>
 </body>
