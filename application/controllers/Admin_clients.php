@@ -3,7 +3,6 @@ class Admin_clients extends CI_Controller{
     function __construct(){
         parent::__construct();
         $this->session->set_userdata('HTTP_REFERER',current_url());
-        $this->load->library('common');
     }
     function add(){
         $data = array(

@@ -4,22 +4,16 @@
         <div class="sidebar-toggler hidden-phone"></div>
         <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
     </li>
-    <li class="start <?php echo $menuactive['dashboard'];?> ">
-        <a href="/admin_dashboard">
-        <i class="icon-home"></i> 
-        <span class="title">Dashboard</span>
-        </a>
-    </li>
-    <li class="start <?php echo $menuactive['users'];?>" >
-        <a href="/admin_users/">
+    <?php
+    foreach($this->common->getmenus() as $menu){
+    ?>
+    <li class="start <?php echo $menuactive[$menu['name']];?>" >
+        <a href="<?php echo $menu['url']?>">
         <i class="icon-group"></i> 
-        <span class="title">Users</span>
+        <span class="title"><?php echo $menu['title']?></span>
         </a>
     </li>
-    <li class="start <?php echo $menuactive['clients'];?>" >
-        <a href="/admin_clients/">
-        <i class="icon-group"></i> 
-        <span class="title">Clients</span>
-        </a>
-    </li>
+    <?php
+    }
+    ?>
 </ul>

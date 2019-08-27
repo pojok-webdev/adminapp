@@ -2,7 +2,6 @@
 class Admin_tickets extends CI_Controller{
     function __construct(){
         parent::__construct();
-        $this->load->library('common');
     }
     function index(){
         $this->load->model('ticket');

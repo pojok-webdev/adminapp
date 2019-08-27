@@ -3,7 +3,6 @@ class Admin_users extends CI_Controller{
     function __construct(){
         parent::__construct();
         $this->session->set_userdata('HTTP_REFERER',current_url());
-        $this->load->library('common');
     }
     function add(){
         $data = array(
@@ -41,7 +40,7 @@ class Admin_users extends CI_Controller{
                 'third'=>'Users',
                 'thirdurl'=>'/admin/users'
             ),
-            'menuactive'=>$this->set_menu_active('users')
+            'menuactive'=>$this->common->set_menu_active('users')
         );
         $this->load->view('admin/users',$data);
     }
