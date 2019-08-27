@@ -3,6 +3,7 @@ class Admin_dashboard extends CI_Controller{
     function __construct(){
         parent::__construct();
         $this->session->set_userdata('HTTP_REFERER',current_url());
+        $this->load->library('common');
     }
     function index(){
         $data = array(
@@ -17,16 +18,8 @@ class Admin_dashboard extends CI_Controller{
                 'third'=>'Users',
                 'thirdurl'=>'/admin/dashboard'
             ),
-            'menuactive'=>$this->set_menu_active('dashboard')
+            'menuactive'=>$this->common->set_menu_active('dashboard')
         );
         $this->load->view('admin/dashboard',$data);
-    }
-    function set_menu_active($par){
-        $menu['dashboard'] = '';
-        $menu['users'] = '';
-        $menu['clients'] = '';
-        $menu['devices'] = '';
-        $menu[$par] = 'active';
-        return $menu;
     }
 }

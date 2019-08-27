@@ -3,6 +3,7 @@ class Admin_users extends CI_Controller{
     function __construct(){
         parent::__construct();
         $this->session->set_userdata('HTTP_REFERER',current_url());
+        $this->load->library('common');
     }
     function add(){
         $data = array(
@@ -17,7 +18,7 @@ class Admin_users extends CI_Controller{
                 'third'=>'Users',
                 'thirdurl'=>'/admin_users',
             ),
-            'menuactive'=>$this->set_menu_active('users')
+            'menuactive'=>$this->common->set_menu_active('users')
         );
         $this->load->view('admin/useradd',$data);
     }
@@ -77,13 +78,5 @@ class Admin_users extends CI_Controller{
             'menuactive'=>$this->set_menu_active('users')
         );
         $this->load->view('admin/user',$data);
-    }
-    function set_menu_active($par){
-        $menu['dashboard'] = '';
-        $menu['users'] = '';
-        $menu['clients'] = '';
-        $menu['devices'] = '';
-        $menu[$par] = 'active';
-        return $menu;
     }
 }
