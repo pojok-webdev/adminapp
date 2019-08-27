@@ -11,4 +11,17 @@ class User extends CI_Model{
         $res = $que->result();
         return $res[0];
     }
+    function gets(){
+        $sql = "select a.id,a.username,a.email,createdate,group_concat(c.name)gr from users a ";
+        $sql.= "left outer join groups_users b on b.user_id=a.id ";
+        $sql.= "left outer join groups c on c.id = a.group_id ";
+        $sql.= "where a.active = '1' ";
+        $sql.= "group by a.id,a.username ";
+        $ci = & get_instance();
+        $que = $ci->db->query($sql);
+        return array(
+            'cnt'=>$que->num_rows(),
+            'res'=>$que->result()
+        );
+    }
 }

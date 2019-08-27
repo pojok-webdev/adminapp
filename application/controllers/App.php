@@ -19,18 +19,39 @@ class App extends CI_Controller{
         );
         $this->load->view('admin/login_soft',$data);
     }
+    function login(){
+        $data = array(
+            'title'=>'PadiApp Login Page',
+            'pagetitle'=>'Login',
+            'pagesubtitle'=>'padi Internet',
+            'breadcrumbs'=>array(
+                'first'=>'Home',
+                'firsturl'=>'/',
+                'second'=>'Admin',
+                'secondurl'=>'/admin_users',
+                'third'=>'Users',
+                'thirdurl'=>'/admin_users',
+            ),
+        );
+        $this->load->view('admin/login_soft',$data);
+    }
     function login_handler(){
         $params = $this->input->post();
         $email = $params['email'];
         $userpassword = $params['password'];
         $checkuser = $this->ceklogin($email,$userpassword);
+        echo $this->session->userdata('HTTP_REFERER');
         if($checkuser!==false){
             $this->session->set_userdata('useremail',$email);
             $this->session->set_userdata('username',$checkuser->username);
             $this->session->set_userdata('userid',$checkuser->id);
-            redirect('admin_users');
+            if($this->session->userdata('HTTP_REFERER')!==''){
+                redirect($this->session->userdata('HTTP_REFERER'));
+            }else{
+                redirect('admin_users');
+            }
         }else{
-            redirect('app/logout');
+            //redirect('app/logout');
         }
     }
     function lock(){

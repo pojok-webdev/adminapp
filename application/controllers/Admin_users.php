@@ -2,6 +2,7 @@
 class Admin_users extends CI_Controller{
     function __construct(){
         parent::__construct();
+        $this->session->set_userdata('HTTP_REFERER',current_url());
     }
     function add(){
         $data = array(
@@ -24,10 +25,13 @@ class Admin_users extends CI_Controller{
         redirect('/admin_users/');
     }
     function index(){
+        $this->load->model('user');
+        $objs = $this->user->gets();
         $data = array(
             'title'=>'Users list',
             'pagetitle'=>'Users',
             'pagesubtitle'=>'padi Internet',
+            'objs'=>$objs['res'],
             'breadcrumbs'=>array(
                 'first'=>'Home',
                 'firsturl'=>'/',

@@ -2,6 +2,7 @@
 class Admin_dashboard extends CI_Controller{
     function __construct(){
         parent::__construct();
+        $this->session->set_userdata('HTTP_REFERER',current_url());
     }
     function index(){
         $data = array(
