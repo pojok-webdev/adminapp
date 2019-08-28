@@ -93,7 +93,7 @@
 											<th>Kode</th>
 											<th>Name</th>
 											<th class="hidden-480">Createdate</th>
-											<th class="hidden-480">Engine version</th>
+											<th class="hidden-480">Age</th>
 											<th class="hidden-480">CSS grade</th>
 										</tr>
 									</thead>
@@ -102,8 +102,8 @@
 										<tr>
 											<td><?php echo $obj->kdticket;?></td>
 											<td><?php echo $obj->clientname;?></td>
-											<td class="hidden-480"><?php echo $obj->create_date;?></td>
-											<td class="hidden-480 curdate">4</td>
+											<td class="hidden-480 createdate"><?php echo $obj->create_date;?></td>
+											<td class="hidden-480 curdate"></td>
 											<td class="hidden-480">X</td>
 										</tr>
 										<?php }?>
@@ -125,6 +125,7 @@
 	<?php $this->load->view('commons/metronic_footer');?>
 	<!-- END FOOTER -->
 	<?php $this->load->view('commons/metronic_table_footer');?>
+	<script src="/assets/padiapp/ticket.js"></script>
 	<script>
 		jQuery(document).ready(function() {
 			var initTable = function() {
@@ -155,9 +156,20 @@
 
 		   	App.init();
 			initTable();
+			console.log("getduration",getduration(getjsdate('01/01/2019 00:00:00'),getjsdate('01/02/2019 01:01:01')))
+			setInterval(
+				function(){
+					console.log("createdate",$("#thisdatatable tbody tr td.createdate").html());
+					$("#thisdatatable tbody tr td.curdate").each(function(){
+						$(this)
+						.html(getduration(getjsdate($(this).parent().find('.createdate').html()),getjsdate(getcurrentdatetime())));
+					})					
+				},
+				1000
+			);
+			
 		});
 	</script>
-	<script src="/assets/padiapp/ticket.js"></script>
 </body>
 <!-- END BODY -->
 </html>
